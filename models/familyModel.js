@@ -25,7 +25,6 @@ const familySchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  // Autres champs spécifiques à la famille
   father: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Family',
@@ -40,12 +39,10 @@ const familySchema = new mongoose.Schema({
       ref: 'Family',
     },
   ],
-  // Ajoutez d'autres champs au besoin
   events: [
     {
       eventName: String,
       eventDate: Date,
-      // Ajoutez d'autres champs au besoin
     },
   ],
   birthPlace: String,
@@ -53,9 +50,7 @@ const familySchema = new mongoose.Schema({
   contactInformation: {
     email: String,
     phone: String,
-    // Ajoutez d'autres champs au besoin
   },
-  // Ajoutez d'autres champs au besoin
 });
 
 const Family = mongoose.model('Family', familySchema);
