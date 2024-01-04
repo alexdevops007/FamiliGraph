@@ -33,11 +33,11 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur l'api ProFedeMap");
+  res.send("Bienvenue sur l'api FamiliGraph");
 });
 app.get("/api", (req, res) => {
   res.status(200).json({
-    message: "Bienvenue sur l'api ProFedeMap",
+    message: "Bienvenue sur l'api FamiliGraph",
   });
 });
 
