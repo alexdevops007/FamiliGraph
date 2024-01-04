@@ -2,10 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const cors = require("cors");
-const db = require("./config/db");
+const config = require('./config/config');
+const db = require('./database/connection');
 const familyRoutes = require('./routes/familyRoutes');
 
-const config = require("./config");
+const { port } = config.server;
 const helmet = require("helmet");
 
 dotenv.config();
@@ -50,6 +51,6 @@ app.use((err, req, res, next) => {
 });
 
 // Lancement du serveur
-app.listen(config.port, () =>
+app.listen(port, () =>
   console.log(`Le serveur s'exécute sur le port ${config.port}`.bgBlue.bold)
 );
