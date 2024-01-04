@@ -1,16 +1,16 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const colors = require("colors");
+const dotenv = require("dotenv");
 const cors = require("cors");
-const db = require("./config/db");
-const familyRoutes = require('./routes/familyRoutes');
-
-const config = require("./config");
 const helmet = require("helmet");
+const mongodb = require("./database/mongodb");
 
-dotenv.config();
+const familyRoutes = require("./routes/familyRoutes");
 
 const app = express();
+const config = require("./config");
+
+dotenv.config();
 
 // Middleware
 app.use(cors());
@@ -41,7 +41,7 @@ app.get("/api", (req, res) => {
 });
 
 // Routes
-app.use('/family', familyRoutes);
+app.use("/api", familyRoutes);
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {
@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Erreur serveur");
 });
 
-// Lancement du serveur
+app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(config.port, () =>
-  console.log(`Le serveur s'exécute sur le port ${config.port}`.bgBlue.bold)
+  console.log(`Example app listening on port ${config.port}!`.bgBlue.bold)
 );
