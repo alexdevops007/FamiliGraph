@@ -1,7 +1,7 @@
 module.exports = {
   // Configuration de la base de données MongoDB
   db: {
-    url: 'mongodb+srv://xandermobutu:123FamiliGraph123@familigraph.g1qk1bk.mongodb.net/FamiliGraph?retryWrites=true&w=majority',
+    url: 'mongodb+srv://xandermobutu:123FamiliGraph123@familigraph.hqg9dj0.mongodb.net/FamiliGraph?retryWrites=true&w=majority',
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,
