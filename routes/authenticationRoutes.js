@@ -5,9 +5,9 @@ const authenticationController = require('../controllers/authenticationControlle
 // Routes publiques pour l'authentification
 
 // Route pour l'inscription (création d'un nouvel utilisateur)
-router.post('/signup', authenticationController.signup);
+router.post('/auth/signup', authenticationController.signup);
 
 // Route pour la connexion
-router.post('/login', authenticationController.login);
+router.post("/auth/login", authenticationController.login);
 
 module.exports = router;
