@@ -6,7 +6,7 @@ const familyController = {
     try {
       const familyMembers = await Family.find(
         {},
-        "firstName lastName gender isAlive"
+        "firstName lastName gender isAlive father mother children"
       );
       res.status(200).json(familyMembers);
     } catch (error) {
