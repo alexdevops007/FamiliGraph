@@ -16,8 +16,12 @@ beforeEach(async () => {
 // Testez la création d'un nouvel utilisateur
 test('Création d\'un nouvel utilisateur', async () => {
   const response = await request(app)
-    .post('/signup')
-    .send({ username: 'newuser', email: 'newuser@example.com', password: 'newpassword' })
+    .post("/api/auth/signup")
+    .send({
+      username: "newuser",
+      email: "newuser@example.com",
+      password: "newpassword",
+    })
     .expect(201);
 
   const newUser = await User.findById(response.body._id);
@@ -29,7 +33,7 @@ test('Création d\'un nouvel utilisateur', async () => {
 // Testez la récupération de tous les utilisateurs
 test('Récupération de tous les utilisateurs', async () => {
   const response = await request(app)
-    .get('/users')
+    .get('/api/users')
     .expect(200);
 
   expect(response.body.length).toBe(1); // Un utilisateur déjà présent dans la base de données
@@ -40,7 +44,7 @@ test('Récupération d\'un utilisateur spécifique', async () => {
   const existingUser = await User.findOne();
 
   await request(app)
-    .get(`/users/${existingUser._id}`)
+    .get(`/api/users/${existingUser._id}`)
     .expect(200);
 });
 
@@ -50,7 +54,7 @@ test('Mise à jour d\'un utilisateur', async () => {
   const updatedData = { username: 'UpdatedUsername', email: 'updated@example.com' };
 
   await request(app)
-    .put(`/users/${existingUser._id}`)
+    .put(`/api/users/${existingUser._id}`)
     .send(updatedData)
     .expect(200);
 
@@ -65,7 +69,7 @@ test('Suppression d\'un utilisateur', async () => {
   const existingUser = await User.findOne();
 
   await request(app)
-    .delete(`/users/${existingUser._id}`)
+    .delete(`/api/users/${existingUser._id}`)
     .expect(200);
 
   const deletedUser = await User.findById(existingUser._id);
@@ -77,6 +81,6 @@ test('Récupération d\'un utilisateur inexistant', async () => {
   const nonExistentUserId = mongoose.Types.ObjectId();
 
   await request(app)
-    .get(`/users/${nonExistentUserId}`)
+    .get(`/api/users/${nonExistentUserId}`)
     .expect(404);
 });

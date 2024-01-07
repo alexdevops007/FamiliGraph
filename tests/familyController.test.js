@@ -16,7 +16,7 @@ beforeEach(async () => {
 // Testez la création d'un membre de la famille
 test('Création d\'un membre de la famille', async () => {
   const response = await request(app)
-    .post('/family')
+    .post('/api/family')
     .send({ firstName: 'Jane', lastName: 'Doe', gender: 'Female' })
     .expect(201);
 
@@ -30,7 +30,7 @@ test('Création d\'un membre de la famille', async () => {
 // Testez la récupération de tous les membres de la famille
 test('Récupération de tous les membres de la famille', async () => {
   const response = await request(app)
-    .get('/family')
+    .get('/api/family')
     .expect(200);
 
   expect(response.body.length).toBe(1); // Un membre déjà présent dans la base de données
@@ -41,7 +41,7 @@ test('Récupération d\'un membre spécifique de la famille', async () => {
   const existingMember = await Family.findOne();
 
   await request(app)
-    .get(`/family/${existingMember._id}`)
+    .get(`/api/family/${existingMember._id}`)
     .expect(200);
 });
 
@@ -51,7 +51,7 @@ test('Mise à jour d\'un membre de la famille', async () => {
   const updatedData = { firstName: 'UpdatedName', lastName: 'UpdatedLastName', gender: 'Female' };
 
   await request(app)
-    .put(`/family/${existingMember._id}`)
+    .put(`/api/family/${existingMember._id}`)
     .send(updatedData)
     .expect(200);
 
@@ -67,7 +67,7 @@ test('Suppression d\'un membre de la famille', async () => {
   const existingMember = await Family.findOne();
 
   await request(app)
-    .delete(`/family/${existingMember._id}`)
+    .delete(`/api/family/${existingMember._id}`)
     .expect(200);
 
   const deletedMember = await Family.findById(existingMember._id);
@@ -79,6 +79,6 @@ test('Récupération d\'un membre de la famille inexistant', async () => {
   const nonExistentMemberId = mongoose.Types.ObjectId();
 
   await request(app)
-    .get(`/family/${nonExistentMemberId}`)
+    .get(`/api/family/${nonExistentMemberId}`)
     .expect(404);
 });
